@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'post_list' %}">Список постов</a>
+<h1>{{ title }}</h1>
+<div>
+  {% for post in posts %}
+    <div>
+        {{ post.title }}
+        {{ post.author }}
+    </div>
+  {% endfor%}
+</div>
+
+</body>
+</html>

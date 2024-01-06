@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+</head>
+<body>
+
+
+<h1>Posts: </h1>
+
+<div>
+
+    {% for post in posts %}
+
+    <h3>{{ post.title }}</h3>
+    <h4>{{ post.author }}</h4>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="post_id" value="{{ post.pk }}">
+        <button type="submit" name="like">Like ({{ post.likes }})</button>
+
+    </form>
+
+
+    {% for tag in post.tags.all %}
+        <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+    {% endfor %}
+
+   <br>
+
+    <a href="{% url 'post_detail' post.slug %}">Посмотреть</a>
+    <a href="{% url 'create_post' %}">Создать</a>
+    <a href="{% url 'update_post' post.pk  %}">Изменить</a>
+    <a href="{% url 'delete_post' post.slug  %}">Удалить</a><br>
+
+    {% endfor %}
+
+</div>
+
+
+</body>
+</html>
